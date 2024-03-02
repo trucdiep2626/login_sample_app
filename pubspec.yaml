@@ -1,0 +1,209 @@
+name: login_sample_app
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+4
+
+environment:
+  sdk: '>=3.0.0 <3.5.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: 1.0.5
+
+  # DateFormat
+  intl: 0.18.0
+
+  #local database
+  #hive: 2.2.3
+  hive_flutter: 1.1.0
+
+  # Simple Animation
+  simple_animations: 5.0.2
+
+
+  path_provider: 2.0.15
+
+  #crypto
+  #crypto: 3.0.2
+
+  connectivity_plus: 3.0.2
+  flutter_keyboard_visibility: 5.4.0
+  flutter_localizations: # Add this line
+    sdk: flutter
+  hooks_riverpod: 2.3.2
+  #flutter_hooks: 0.18.6
+  state_notifier: 0.7.2+1
+
+  page_transition: 2.0.9
+
+  intl_utils: 2.8.2
+
+  multiple_localization:
+
+
+  json_serializable: ^6.5.4
+  freezed_annotation: 2.2.0
+  freezed: 2.3.2
+
+  flutter_riverpod: 2.3.2
+  flutter_svg: 2.0.9
+  lottie: 1.4.2
+  flutter_cache_manager: 3.3.1
+  cached_network_image: 3.2.1
+  shared_preferences: 2.0.15
+  shimmer: 3.0.0
+  permission_handler: 10.4.0
+
+  #  Network
+  dio: 5.2.0
+  flutter_gen: 5.3.1
+  carousel_slider: 4.2.1
+  #timezone: 0.9.1
+  logger: 1.4.0
+  flutter_secure_storage: 8.0.0
+  pull_to_refresh: 2.0.0
+  stylish_bottom_bar: 0.1.5
+
+
+  #google_sign_in: 6.0.2
+
+  percent_indicator: 4.2.3
+
+  #app version
+  package_info_plus: 4.2.0
+
+  flutter_svg_provider: 1.0.4
+  decorated_icon: 1.2.1
+  url_launcher: 6.1.10
+  flutter_widget_from_html_core: 0.14.11
+  share_plus: 7.2.1
+  dependency_validator:
+
+#  table_calendar: 3.0.9
+#  image_picker: 1.0.4
+  device_info_plus: 9.1.1
+#  file_picker: 6.1.1
+  jwt_decode: 0.3.1
+  get_it: 7.6.0
+
+dev_dependencies:
+  #  flutter_test:
+  #    sdk: flutter
+  # mockito: 5.3.2
+  #flutter_native_splash: 2.2.9
+  hive_generator: 2.0.0
+  build_runner: 2.4.6
+  flutter_gen_runner: 5.3.1
+  flutter_lints: 2.0.1
+#  espresso: 0.3.0+6
+#  flutter_driver:
+#    sdk: flutter
+#  flutter_test:
+#    sdk: flutter
+#  integration_test:
+#    sdk: flutter
+
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  generate: true
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/svg/
+    - assets/images/png/
+#    - assets/images/lotties/
+#    - assets/fonts/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+#  fonts:
+#    - family: Inter
+#      fonts:
+#        - asset: assets/fonts/Inter-Regular.ttf
+#          weight: 400
+#        - asset: assets/fonts/Inter-Medium.ttf
+#          weight: 500
+#        - asset: assets/fonts/Inter-SemiBold.ttf
+#          weight: 600
+#        - asset: assets/fonts/Inter-Bold.ttf
+#          weight: 700
+    #
+    # For details regarding fonts from package dependencies,
+    # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_gen:
+  output: lib/generated/ # Optional (default: lib/gen/)
+  line_length: 80 # Optional (default: 80)
+  # Optional
+  integrations:
+    flutter_svg: true
+    flare_flutter: true
+    rive: true
+    lottie: true
+
+# https://pub.dev/packages/flutter_launcher_icons
+## flutter pub run flutter_launcher_icons:main
+#flutter_icons:
+#  android: true
+#  ios: true
+#  remove_alpha_ios: true
+#  image_path: "assets/images/img_icon_app.png"
+
+# https://pub.dev/packages/flutter_native_splash
+# flutter pub run flutter_native_splash:create
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/images/img_splash.png
+  web: false
+
+flutter_intl:
+  enabled: true # Required. Must be set to true to activate the package. Default: false
+  class_name: L10n # Optional. Sets the name for the generated localization class. Default: S
+  main_locale: en # Optional. Sets the main locale used for generating localization files. Provided value should consist of language code and optional script and country codes separated with underscore (e.g. 'en', 'en_GB', 'zh_Hans', 'zh_Hans_CN'). Default: en
+  arb_dir: lib/l10n # Optional. Sets the directory of your ARB resource files. Provided value should be a valid path on your system. Default: lib/l10n
+  output_dir: lib/l10n # Optional. Sets the directory of generated localization files. Provided value should be a valid path on your system. Default: lib/generated
+  use_deferred_loading: false # Optional. Must be set to true to generate localization code that is loaded with deferred loading. Default: false
