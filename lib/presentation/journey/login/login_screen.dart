@@ -7,11 +7,26 @@ import 'package:login_sample_app/presentation/journey/login/login_state_notifier
 import 'package:login_sample_app/presentation/theme/export.dart';
 import 'package:login_sample_app/presentation/widgets/export.dart';
 
-class LoginScreen extends ConsumerWidget with LayoutExtension {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends ConsumerStatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen>
+    with TickerProviderStateMixin, LayoutExtension {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref.read(loginProvider.notifier).initData();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final loginState = ref.watch(loginProvider);
     final loginStateNotifier = ref.read(loginProvider.notifier);
 

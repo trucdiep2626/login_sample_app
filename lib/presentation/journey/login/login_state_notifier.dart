@@ -19,6 +19,27 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
     passwordController.addListener(checkButtonEnable);
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void initData() {
+    state = state.copyWith(
+      enableButton: false,
+      showPassword: false,
+      buttonLoadedType: LoadedType.finish,
+      errorText: '',
+      emailErrorBorder: false,
+      passwordErrorBorder: false,
+    );
+    emailController.clear();
+    passwordController.clear();
+  }
+
   // Variable for Ref
   Ref ref;
   AccountUseCase accountUseCase;
