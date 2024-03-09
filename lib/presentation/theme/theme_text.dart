@@ -192,6 +192,21 @@ extension CommonFontSize on TextStyle {
         fontSize: 24.sp,
       );
 
+  /// fontSize: 26
+  TextStyle get s26 => copyWith(
+    fontSize: 26.sp,
+  );
+
+  /// fontSize: 28
+  TextStyle get s28 => copyWith(
+    fontSize: 28.sp,
+  );
+
+  /// fontSize: 30
+  TextStyle get s30 => copyWith(
+    fontSize: 30.sp,
+  );
+
   /// fontSize: 32
   TextStyle get s32 => copyWith(
         fontSize: 32.sp,
@@ -330,6 +345,9 @@ extension CommonFontColor on TextStyle {
 
   /// color: AppColors.orange10,
   TextStyle get orange10 => copyWith(color: AppColors.orange10);
+
+  /// color: AppColors.blue,
+  TextStyle get blue => copyWith(color: AppColors.blue);
 
   /// color: AppColors.blue0,
   TextStyle get blue0 => copyWith(color: AppColors.blue0);

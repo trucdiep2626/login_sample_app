@@ -67,21 +67,21 @@ class AppValidator {
   //   );
   // }
 
-  // static String validatePassword(TextEditingController passwordCtrl) {
-  //   return error(
-  //     passwordCtrl.text.trim(),
-  //     AppValidation.password,
-  //     TranslationConstants.passwordFormatError.tr,
-  //   );
-  // }
+  static String validatePassword(TextEditingController passwordCtrl) {
+    return error(
+      passwordCtrl.text.trim(),
+      AppValidation.password,
+      L10n.current.password_error,
+    );
+  }
 
-  // static String validateConfirmPassword(TextEditingController passwordCtrl,
-  //     TextEditingController confirmPasswordCtrl) {
-  //   if (passwordCtrl.text.compareTo(confirmPasswordCtrl.text) != 0) {
-  //     return TranslationConstants.confirmPasswordError.tr;
-  //   }
-  //   return '';
-  // }
+  static String validateConfirmPassword(TextEditingController passwordCtrl,
+      TextEditingController confirmPasswordCtrl) {
+    if (passwordCtrl.text.compareTo(confirmPasswordCtrl.text) != 0) {
+      return L10n.current.confirm_password_error;
+    }
+    return '';
+  }
 
   static String validateName(TextEditingController nameCtrl) {
     return error(

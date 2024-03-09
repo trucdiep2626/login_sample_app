@@ -127,7 +127,8 @@ class ApiClient {
       if (response.statusCode != 401) {
         return _processResponse(response, getFullResponse);
       }
-    } on DioException catch (e) {
+    } on DioError catch (e) {
+      print('-----------------$e');
       if (e.response != null) {
         return _processResponse(e.response!, getFullResponse);
       } else {

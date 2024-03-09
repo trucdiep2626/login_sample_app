@@ -2,8 +2,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
-
 hideKeyboard() {
   FocusManager.instance.primaryFocus?.unfocus();
 }
@@ -94,9 +92,6 @@ Future<bool> checkPermission(Permission permission) async {
   return status.isGranted;
 }
 
-
-
-
 Future<bool> checkConnectivity() async {
   var connectivityResult = await Connectivity().checkConnectivity();
   if (connectivityResult == ConnectivityResult.none) {
@@ -110,5 +105,10 @@ Future<bool> checkConnectivity() async {
   return true;
 }
 
-
-
+String formatSecondToMinute({required int timeInSecond}) {
+  final sec = timeInSecond % 60;
+  final min = (timeInSecond / 60).floor();
+  final minute = min.toString().length <= 1 ? '0$min' : '$min';
+  final second = sec.toString().length <= 1 ? '0$sec' : '$sec';
+  return '$minute:$second';
+}

@@ -6,7 +6,7 @@ import 'package:login_sample_app/domain/models/requests/login_request.dart';
 import 'package:login_sample_app/domain/usecases/account_usecase.dart';
 import 'package:login_sample_app/presentation/journey/login/login_state.dart';
 
-final loginProvider = StateNotifierProvider<LoginStateNotifier, LoginState>(
+final loginProvider = StateNotifierProvider.autoDispose<LoginStateNotifier, LoginState>(
     (ref) =>
         LoginStateNotifier(ref: ref, accountUseCase: getIt<AccountUseCase>()));
 
@@ -27,7 +27,7 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
     passwordController.dispose();
   }
 
-  void initData() {
+  void initData(UserType userType) {
     state = state.copyWith(
       enableButton: false,
       showPassword: false,
@@ -35,6 +35,7 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
       errorText: '',
       emailErrorBorder: false,
       passwordErrorBorder: false,
+      userType: userType,
     );
     emailController.clear();
     passwordController.clear();
@@ -51,7 +52,7 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       state = state.copyWith(enableButton: true);
     } else {
-      state = state.copyWith(enableButton: true);
+      state = state.copyWith(enableButton: false);
     }
   }
 
@@ -72,10 +73,13 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
 
       try {
         final result = await accountUseCase.login(
-            loginRequest: LoginRequest(
-          email: emailController.text,
-          password: passwordController.text,
-        ));
+          loginRequest: LoginRequest(
+            email: emailController.text,
+            password: passwordController.text,
+            type: UserTypeHelper.getUserTypeString(
+                state.userType ?? UserType.passenger),
+          ),
+        );
 
         if (!isNullEmpty(result)) {
           await accountUseCase.setAccessToken(result?.accessToken ?? '');
@@ -87,9 +91,9 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
           String error = '';
           e.errorValidate?.forEach((value) {
             if (value is List) {
-              error += value.join('\n') + '\n';
+              error += '${value.join('\n')}\n';
             } else if (value is String) {
-              error += value + '\n';
+              error += '$value\n';
             }
           });
           state = state.copyWith(

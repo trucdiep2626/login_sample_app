@@ -3,3 +3,4 @@ export 'status_bar_style/export.dart';
 export 'app_text_input_formatter.dart';
 export 'app_utils.dart';
 export 'layout_extension.dart';
+export 'user_type_helper.dart';

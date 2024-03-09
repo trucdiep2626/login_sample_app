@@ -31,7 +31,7 @@ class SplashStateNotifier extends StateNotifier<SplashState> {
       }
     } else {
       NavigationService.routeToAndRemoveUntil(
-          RouteGenerator.login, (route) => false);
+          RouteGenerator.introduction, (route) => false);
     }
   }
 }

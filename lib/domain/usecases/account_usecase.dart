@@ -2,6 +2,9 @@ import 'package:login_sample_app/common/common_export.dart';
 import 'package:login_sample_app/data/account_repository.dart';
 import 'package:login_sample_app/data/local_repository.dart';
 import 'package:login_sample_app/domain/models/requests/login_request.dart';
+import 'package:login_sample_app/domain/models/requests/register_request.dart';
+import 'package:login_sample_app/domain/models/requests/send_sign_up_code_request.dart';
+import 'package:login_sample_app/domain/models/response/base_response.dart';
 import 'package:login_sample_app/domain/models/response/login_response.dart';
 
 class AccountUseCase {
@@ -26,6 +29,25 @@ class AccountUseCase {
 
   Future<String?> getRefreshToken() async {
     return await localRepo.getSecureData(key: Constants.refreshToken);
+  }
+
+  Future<LoginResponse?> register({
+    required RegisterRequest registerRequest,
+  }) async {
+    final result = await accountRepo.register(registerRequest: registerRequest);
+    if (result != null) {
+      final response = LoginResponse.fromJson(result);
+      return response;
+    }
+    return null;
+  }
+
+  Future<BaseResponse?> sendSignUpCode({
+    required SendSignUpCodeRequest sendSignUpCodeRequest,
+  }) async {
+    final result = await accountRepo.sendSignUpCode(
+        sendSignUpCodeRequest: sendSignUpCodeRequest);
+   return result;
   }
 
   Future<LoginResponse?> login({

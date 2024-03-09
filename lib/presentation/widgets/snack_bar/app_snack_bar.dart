@@ -49,16 +49,16 @@ class AppSnackBarWidget extends StatelessWidget {
     required this.message,
   }) : super(key: key);
 
-  // SvgGenImage get icon {
-  //   switch (type) {
-  //     case SnackBarType.done:
-  //       return Assets.images.svg.icDone;
-  //     case SnackBarType.error:
-  //       return Assets.images.svg.icCircleClose;
-  //     default:
-  //       return Assets.images.svg.icWarning;
-  //   }
-  // }
+  IconData get icon {
+    switch (type) {
+      case SnackBarType.done:
+        return Icons.done;
+      case SnackBarType.error:
+        return Icons.clear;
+      default:
+        return Icons.warning_amber;
+    }
+  }
 
   Color? get backgroundColor {
     switch (type) {

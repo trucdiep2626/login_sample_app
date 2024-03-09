@@ -3,38 +3,39 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:login_sample_app/common/common_export.dart';
 import 'package:login_sample_app/generated/assets.gen.dart';
 import 'package:login_sample_app/l10n/l10n.dart';
-import 'package:login_sample_app/presentation/journey/login/login_state_notifier.dart';
+import 'package:login_sample_app/presentation/journey/register/register_state_notifier.dart';
 import 'package:login_sample_app/presentation/theme/export.dart';
 import 'package:login_sample_app/presentation/widgets/export.dart';
 
-class LoginScreen extends ConsumerStatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends ConsumerStatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends ConsumerState<LoginScreen>
+class _RegisterScreenState extends ConsumerState<RegisterScreen>
     with TickerProviderStateMixin, LayoutExtension {
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final arg = ModalRoute.of(context)?.settings.arguments as UserType? ??
-          UserType.passenger;
-      ref.read(loginProvider.notifier).initData(arg);
+      final arg = ModalRoute.of(context)?.settings.arguments;
+      if (arg is UserType) {
+        ref.read(registerProvider.notifier).initData(arg);
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final loginState = ref.watch(loginProvider);
-    final loginStateNotifier = ref.read(loginProvider.notifier);
+    final registerState = ref.watch(registerProvider);
+    final registerStateNotifier = ref.read(registerProvider.notifier);
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBarWidget(
+      appBar: const AppBarWidget(
         showBackButton: true,
       ),
       body: SingleChildScrollView(
@@ -48,61 +49,94 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                 height: AppDimens.height_52,
               ),
               Text(
-                L10n.current.sign_in,
+                L10n.current.create_account,
                 style: ThemeText.bodySemibold.s24,
               ),
               SizedBox(
                 height: AppDimens.height_28,
               ),
               AppTextField(
-                borderColor: loginState.emailErrorBorder
+                borderColor: registerState.emailErrorBorder
                     ? AppColors.red
                     : AppColors.stroke,
                 prefixIcon: AppImageWidget(
                   asset: Assets.images.svg.icUser,
                 ),
                 hintText: L10n.current.enter_email,
-                controller: loginStateNotifier.emailController,
+                controller: registerStateNotifier.emailController,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
+                errorText: registerState.emailValidate ?? '',
                 onEditingComplete: () => FocusScope.of(context).nextFocus(),
               ),
               SizedBox(
                 height: AppDimens.space_12,
               ),
               AppTextField(
-                borderColor: loginState.passwordErrorBorder
+                borderColor: registerState.passwordErrorBorder
                     ? AppColors.red
                     : AppColors.stroke,
                 prefixIcon: AppImageWidget(
                   asset: Assets.images.svg.icPassword,
                 ),
                 suffixIcon: AppTouchable(
-                  onPressed: () => loginStateNotifier.onPressedShowPassword(),
+                  onPressed: () =>
+                      registerStateNotifier.onPressedShowPassword(),
                   child: Icon(
-                    loginState.showPassword
+                    registerState.showPassword
                         ? Icons.visibility
                         : Icons.visibility_off,
                     color: AppColors.blue,
                   ),
                 ),
                 hintText: L10n.current.enter_password,
-                controller: loginStateNotifier.passwordController,
-                obscureText: !loginState.showPassword,
+                controller: registerStateNotifier.passwordController,
+                obscureText: !registerState.showPassword,
+                textInputAction: TextInputAction.next,
+                onEditingComplete: () => FocusScope.of(context).requestFocus(
+                    registerStateNotifier.confirmPasswordFocusNode),
+                errorText: registerState.passwordValidate ?? '',
+              ),
+              SizedBox(
+                height: AppDimens.space_12,
+              ),
+              AppTextField(
+                borderColor: registerState.passwordErrorBorder
+                    ? AppColors.red
+                    : AppColors.stroke,
+                prefixIcon: AppImageWidget(
+                  asset: Assets.images.svg.icPassword,
+                ),
+                suffixIcon: AppTouchable(
+                  onPressed: () =>
+                      registerStateNotifier.onPressedShowConfirmPassword(),
+                  child: Icon(
+                    registerState.showConfirmPassword
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: AppColors.blue,
+                  ),
+                ),
+                hintText: L10n.current.enter_confirm_password,
+                controller: registerStateNotifier.confirmPasswordController,
+                obscureText: !registerState.showConfirmPassword,
                 textInputAction: TextInputAction.done,
-                onEditingComplete: () => loginStateNotifier.onPressedLogIn(),
+                focusNode: registerStateNotifier.confirmPasswordFocusNode,
+                errorText: registerState.confirmPasswordValidate ?? '',
+                onEditingComplete: () =>
+                    registerStateNotifier.onPressedRegister(context),
               ),
               SizedBox(
                 height: AppDimens.space_8,
               ),
-              !isNullEmpty(loginState.errorText)
+              !isNullEmpty(registerState.errorText)
                   ? Container(
                       margin: EdgeInsets.symmetric(
                         vertical: AppDimens.space_4,
                       ),
                       width: screenWidth - AppDimens.space_16 * 2,
                       child: Text(
-                        loginState.errorText ?? '',
+                        registerState.errorText ?? '',
                         style: ThemeText.errorText,
                       ),
                     )
@@ -111,29 +145,27 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                 height: AppDimens.space_12,
               ),
               AppButton(
-                onPressed: () => loginStateNotifier.onPressedLogIn(),
-                enable: loginState.enableButton,
-                title: L10n.current.sign_in,
-                loaded: loginState.buttonLoadedType,
+                onPressed: () =>
+                    registerStateNotifier.onPressedRegister(context),
+                enable: registerState.enableButton,
+                title: L10n.current.sign_up,
+                loaded: registerState.buttonLoadedType,
               ),
               SizedBox(
                 height: AppDimens.space_12,
               ),
               RichText(
                 text: TextSpan(
-                  text: L10n.current.dont_have_account,
+                  text: L10n.current.aldready_have_account,
                   style: ThemeText.bodyRegular.s13.grey1_5,
                   children: [
                     WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       child: AppTouchable(
-                        onPressed: () => NavigationService.routeTo(
-                          RouteGenerator.register,
-                          arguments: loginState.userType,
-                        ),
+                        onPressed: () => NavigationService.goBack(),
                         padding: EdgeInsets.only(left: AppDimens.space_4),
                         child: Text(
-                          L10n.current.create_account,
+                          L10n.current.sign_in_here,
                           style: ThemeText.bodySemibold.s13.grey4,
                         ),
                       ),

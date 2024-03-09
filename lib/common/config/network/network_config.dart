@@ -4,6 +4,8 @@ class NetworkConfig {
 
   //auth
   static String login = 'itinerary/auth/sign-in';
+  static String sendSignUpCode = 'itinerary/auth/send-sign-up-code';
+  static String register = 'itinerary/auth/register';
   static String logout = 'authentication/logout';
   static String refreshToken = 'authentication/logout';
 }
