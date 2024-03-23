@@ -3,7 +3,9 @@ import 'package:login_sample_app/common/common_export.dart';
 import 'package:login_sample_app/generated/assets.gen.dart';
 import 'package:login_sample_app/l10n/l10n.dart';
 import 'package:login_sample_app/presentation/theme/export.dart';
+import 'package:login_sample_app/presentation/widgets/app_text.dart';
 import 'package:login_sample_app/presentation/widgets/export.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class IntroductionScreen extends StatelessWidget with LayoutExtension {
   const IntroductionScreen({super.key});
@@ -43,7 +45,7 @@ class IntroductionScreen extends StatelessWidget with LayoutExtension {
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: AppDimens.space_16),
-            child: Text(
+            child: AppText(
               L10n.current.sign_in_with,
               style: ThemeText.bodyRegular.s15.grey3,
             ),
@@ -70,7 +72,7 @@ class IntroductionScreen extends StatelessWidget with LayoutExtension {
       height: AppDimens.space_43 + MediaQuery.of(context).padding.bottom,
       child: Column(
         children: [
-          Text(
+          AppText(
             L10n.current.need_help,
             style: ThemeText.bodyRegular.s14.grey3,
           ),
@@ -88,14 +90,27 @@ class IntroductionScreen extends StatelessWidget with LayoutExtension {
               SizedBox(
                 width: AppDimens.space_4,
               ),
-              Text(
-                Constants.phoneNumber,
-                style: ThemeText.bodyRegular.s12.blue,
+              AppTouchable(
+                onPressed: () async {
+                  const url = "tel:${Constants.phoneNumber2}";
+                  if (await canLaunchUrlString(url)) {
+                    await launchUrlString(url);
+                  } else {
+                    if (context.mounted) {
+                      showTopSnackBarError(
+                          context, L10n.current.something_went_wrong);
+                    }
+                  }
+                },
+                child: AppText(
+                  Constants.phoneNumber,
+                  style: ThemeText.bodyRegular.s12.blue,
+                ),
               ),
               SizedBox(
                 width: AppDimens.space_8,
               ),
-              Text(
+              AppText(
                 L10n.current.or,
                 style: ThemeText.bodyRegular.s12,
               ),
@@ -110,10 +125,22 @@ class IntroductionScreen extends StatelessWidget with LayoutExtension {
               SizedBox(
                 width: AppDimens.space_4,
               ),
-              Text(
-                Constants.phoneNumber2,
-                style: ThemeText.bodyRegular.s12.blue,
-              ),
+              AppTouchable(
+                  onPressed: () async {
+                    const url = "tel:${Constants.phoneNumber2}";
+                    if (await canLaunchUrlString(url)) {
+                      await launchUrlString(url);
+                    } else {
+                      if (context.mounted) {
+                        showTopSnackBarError(
+                            context, L10n.current.something_went_wrong);
+                      }
+                    }
+                  },
+                  child: AppText(
+                    Constants.phoneNumber2,
+                    style: ThemeText.bodyRegular.s12.blue,
+                  )),
             ],
           )
         ],
@@ -147,14 +174,14 @@ class IntroductionScreen extends StatelessWidget with LayoutExtension {
                 SizedBox(
                   height: AppDimens.space_20,
                 ),
-                Text(
+                AppText(
                   L10n.current.tweet_trip,
                   style: ThemeText.bodyStrong.s30.white,
                 ),
                 SizedBox(
                   height: AppDimens.space_12,
                 ),
-                Text(
+                AppText(
                   L10n.current.tweet_trip_message,
                   style: ThemeText.bodyRegular.s16.white,
                 ),

@@ -14,7 +14,8 @@ class AppShimmer extends StatelessWidget {
       this.width,
       this.height,
       this.backgroundColor,
-      this.borderRadius})
+      this.borderRadius,
+      })
       : super(key: key);
 
   @override

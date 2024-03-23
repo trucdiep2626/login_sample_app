@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:login_sample_app/common/common_export.dart';
-import 'package:login_sample_app/generated/assets.gen.dart';
 import 'package:login_sample_app/l10n/l10n.dart';
 import 'package:login_sample_app/presentation/journey/register/register_state_notifier.dart';
 import 'package:login_sample_app/presentation/theme/export.dart';
@@ -35,8 +34,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: const AppBarWidget(
+      appBar: AppBarWidget(
         showBackButton: true,
+        title:
+            '${UserTypeHelper.getUserTypeLabel(registerState.userType ?? UserType.passenger)} - ${L10n.current.register}',
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -46,10 +47,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: AppDimens.height_52,
+                height: AppDimens.height_36,
               ),
-              Text(
-                L10n.current.create_account,
+              AppText(
+                L10n.current.register,
                 style: ThemeText.bodySemibold.s24,
               ),
               SizedBox(
@@ -58,27 +59,67 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
               AppTextField(
                 borderColor: registerState.emailErrorBorder
                     ? AppColors.red
-                    : AppColors.stroke,
-                prefixIcon: AppImageWidget(
-                  asset: Assets.images.svg.icUser,
-                ),
-                hintText: L10n.current.enter_email,
+                    : AppColors.blue,
+                prefixIcon: const Icon(Icons.email),
+                hintText: L10n.current.email,
                 controller: registerStateNotifier.emailController,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
                 errorText: registerState.emailValidate ?? '',
-                onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                focusNode: registerStateNotifier.emailFocusNode,
+                onEditingComplete: () => FocusScope.of(context)
+                    .requestFocus(registerStateNotifier.bookingRefFocusNode),
               ),
               SizedBox(
                 height: AppDimens.space_12,
               ),
+              if (registerState.userType == UserType.tourGuide)
+                Padding(
+                  padding: EdgeInsets.only(bottom: AppDimens.space_12),
+                  child: AppTextField(
+                    borderColor: AppColors.blue,
+                    prefixIcon: const Icon(Icons.numbers),
+                    hintText: L10n.current.booking_ref,
+                    controller: registerStateNotifier.bookingRefController,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    focusNode: registerStateNotifier.bookingRefFocusNode,
+                    onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                  ),
+                ),
+              if (registerState.userType == UserType.tourGuide)
+                Padding(
+                  padding: EdgeInsets.only(bottom: AppDimens.space_12),
+                  child: AppTextField(
+                    borderColor: AppColors.blue,
+                    prefixIcon: const Icon(Icons.person),
+                    hintText: L10n.current.first_name,
+                    controller: registerStateNotifier.firstNameController,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    focusNode: registerStateNotifier.firstNameFocusNode,
+                    onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                  ),
+                ),
+              if (registerState.userType == UserType.tourGuide)
+                Padding(
+                  padding: EdgeInsets.only(bottom: AppDimens.space_12),
+                  child: AppTextField(
+                    borderColor: AppColors.blue,
+                    prefixIcon: const Icon(Icons.person),
+                    hintText: L10n.current.last_name,
+                    controller: registerStateNotifier.lastNameController,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    focusNode: registerStateNotifier.lastNameFocusNode,
+                    onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                  ),
+                ),
               AppTextField(
                 borderColor: registerState.passwordErrorBorder
                     ? AppColors.red
-                    : AppColors.stroke,
-                prefixIcon: AppImageWidget(
-                  asset: Assets.images.svg.icPassword,
-                ),
+                    : AppColors.blue,
+                prefixIcon: const Icon(Icons.password),
                 suffixIcon: AppTouchable(
                   onPressed: () =>
                       registerStateNotifier.onPressedShowPassword(),
@@ -86,12 +127,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                     registerState.showPassword
                         ? Icons.visibility
                         : Icons.visibility_off,
-                    color: AppColors.blue,
+                    color: AppColors.grey3,
                   ),
                 ),
-                hintText: L10n.current.enter_password,
+                hintText: L10n.current.password,
                 controller: registerStateNotifier.passwordController,
                 obscureText: !registerState.showPassword,
+                focusNode: registerStateNotifier.passwordFocusNode,
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => FocusScope.of(context).requestFocus(
                     registerStateNotifier.confirmPasswordFocusNode),
@@ -103,10 +145,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
               AppTextField(
                 borderColor: registerState.passwordErrorBorder
                     ? AppColors.red
-                    : AppColors.stroke,
-                prefixIcon: AppImageWidget(
-                  asset: Assets.images.svg.icPassword,
-                ),
+                    : AppColors.blue,
+                prefixIcon: const Icon(Icons.password),
                 suffixIcon: AppTouchable(
                   onPressed: () =>
                       registerStateNotifier.onPressedShowConfirmPassword(),
@@ -114,10 +154,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                     registerState.showConfirmPassword
                         ? Icons.visibility
                         : Icons.visibility_off,
-                    color: AppColors.blue,
+                    color: AppColors.grey3,
                   ),
                 ),
-                hintText: L10n.current.enter_confirm_password,
+                hintText: L10n.current.confirm_password,
                 controller: registerStateNotifier.confirmPasswordController,
                 obscureText: !registerState.showConfirmPassword,
                 textInputAction: TextInputAction.done,
@@ -135,7 +175,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                         vertical: AppDimens.space_4,
                       ),
                       width: screenWidth - AppDimens.space_16 * 2,
-                      child: Text(
+                      child: AppText(
                         registerState.errorText ?? '',
                         style: ThemeText.errorText,
                       ),
@@ -148,7 +188,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                 onPressed: () =>
                     registerStateNotifier.onPressedRegister(context),
                 enable: registerState.enableButton,
-                title: L10n.current.sign_up,
+                iconData: Icons.arrow_circle_right_rounded,
+                title: L10n.current.register,
                 loaded: registerState.buttonLoadedType,
               ),
               SizedBox(
@@ -164,7 +205,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                       child: AppTouchable(
                         onPressed: () => NavigationService.goBack(),
                         padding: EdgeInsets.only(left: AppDimens.space_4),
-                        child: Text(
+                        child: AppText(
                           L10n.current.sign_in_here,
                           style: ThemeText.bodySemibold.s13.grey4,
                         ),

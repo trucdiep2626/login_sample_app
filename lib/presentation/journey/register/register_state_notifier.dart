@@ -22,9 +22,10 @@ class RegisterStateNotifier extends StateNotifier<RegisterState> {
     emailController.addListener(checkButtonEnable);
     passwordController.addListener(checkButtonEnable);
     confirmPasswordController.addListener(checkButtonEnable);
+    bookingRefController.addListener(checkButtonEnable);
+    firstNameController.addListener(checkButtonEnable);
+    lastNameController.addListener(checkButtonEnable);
   }
-
-
 
   // Variable for Ref
   Ref ref;
@@ -33,10 +34,16 @@ class RegisterStateNotifier extends StateNotifier<RegisterState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final bookingRefController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
 
   final emailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
+  final bookingRefFocusNode = FocusNode();
+  final firstNameFocusNode = FocusNode();
+  final lastNameFocusNode = FocusNode();
 
   @override
   void dispose() {
@@ -45,6 +52,9 @@ class RegisterStateNotifier extends StateNotifier<RegisterState> {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    bookingRefController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
   }
 
   void initData(UserType userType) {
@@ -60,12 +70,19 @@ class RegisterStateNotifier extends StateNotifier<RegisterState> {
     emailController.clear();
     passwordController.clear();
     confirmPasswordController.clear();
+    bookingRefController.clear();
+    firstNameController.clear();
+    lastNameController.clear();
   }
 
   void checkButtonEnable() {
     if (emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
-        confirmPasswordController.text.isNotEmpty) {
+        confirmPasswordController.text.isNotEmpty &&
+        (state.userType == UserType.passenger ||
+            (bookingRefController.text.isNotEmpty &&
+                firstNameController.text.isNotEmpty &&
+                lastNameController.text.isNotEmpty))) {
       state = state.copyWith(enableButton: true);
     } else {
       state = state.copyWith(enableButton: false);

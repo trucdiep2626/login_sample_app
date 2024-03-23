@@ -6,6 +6,7 @@ import 'package:login_sample_app/generated/assets.gen.dart';
 import 'package:login_sample_app/l10n/l10n.dart';
 import 'package:login_sample_app/presentation/journey/verify_sign_up_code/verify_sign_up_code_state_notifier.dart';
 import 'package:login_sample_app/presentation/theme/export.dart';
+import 'package:login_sample_app/presentation/widgets/app_text.dart';
 import 'package:login_sample_app/presentation/widgets/export.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -68,14 +69,14 @@ class _VerifySignUpCodeScreenState extends ConsumerState<VerifySignUpCodeScreen>
               SizedBox(
                 height: AppDimens.height_28,
               ),
-              Text(
+              AppText(
                 L10n.current.otp_verification,
                 style: ThemeText.bodySemibold.s24,
               ),
               SizedBox(
                 height: AppDimens.height_16,
               ),
-              Text(
+              AppText(
                 '${L10n.current.enter_otp} ${formatSecondToMinute(timeInSecond: int.parse(stateNotifier.formatTimeCountDown(state.timeCountDown ?? 0)))}',
                 style: ThemeText.bodyRegular.s14,
                 textAlign: TextAlign.center,
@@ -144,7 +145,7 @@ class _VerifySignUpCodeScreenState extends ConsumerState<VerifySignUpCodeScreen>
                         vertical: AppDimens.space_4,
                       ),
                       width: screenWidth - AppDimens.space_16 * 2,
-                      child: Text(
+                      child: AppText(
                         state.errorText ?? '',
                         style: ThemeText.errorText,
                       ),
@@ -173,7 +174,7 @@ class _VerifySignUpCodeScreenState extends ConsumerState<VerifySignUpCodeScreen>
                         onPressed: () =>
                             stateNotifier.onPressedResendCode(context),
                         padding: EdgeInsets.only(left: AppDimens.space_4),
-                        child: Text(
+                        child: AppText(
                           L10n.current.resend,
                           style: ThemeText.bodySemibold.s13.grey4,
                         ),

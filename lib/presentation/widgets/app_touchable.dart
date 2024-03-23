@@ -14,6 +14,7 @@ class AppTouchable extends StatelessWidget {
   final OutlinedBorder? outlinedBorder;
   final BorderRadius? borderRadius;
   final AlignmentGeometry? alignment;
+  final bool isCircle;
 
   const AppTouchable({
     Key? key,
@@ -28,6 +29,7 @@ class AppTouchable extends StatelessWidget {
     this.outlinedBorder,
     this.borderRadius,
     this.alignment,
+    this.isCircle = false,
   }) : super(key: key);
 
   @override
@@ -39,6 +41,7 @@ class AppTouchable extends StatelessWidget {
       alignment: alignment,
       decoration: BoxDecoration(
         borderRadius: borderRadius,
+        shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
       ),
       child: TextButton(
         onPressed: onPressed,

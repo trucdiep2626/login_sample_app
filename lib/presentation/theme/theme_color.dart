@@ -106,20 +106,17 @@ class AppColors {
   static const Color orange10 = Color(0xff000000);
 
   //blue
-  static const Color blue0 = Color(0xffB0B0B0);
-  static const Color blue0_5 = Color(0xffa1a1a1);
-  static const Color blue1 = Color(0xff929292);
-  static const Color blue1_5 = Color(0xff848484);
-  static const Color blue2 = Color(0xff757575);
-  static const Color blue3 = Color(0xff575757);
-  static const Color blue4 = Color(0xff3a3a3a);
-  static const Color blue5 = Color(0xff1c1c1c);
-  static const Color blue6 = Color(0xff161616);
-  static const Color blue7 = Color(0xff111111);
-  static const Color blue8 = Color(0xff0b0b0b);
-  static const Color blue8_5 = Color(0xff080808);
-  static const Color blue9 = Color(0xff060606);
-  static const Color blue9_5 = Color(0xff030303);
+  static   Color blue50 = Colors.blue.shade50;
+  static   Color blue100 = Colors.blue.shade100;
+
+  static   Color blue200 = Colors.blue.shade200;
+  static   Color blue300 =Colors.blue.shade300;
+  static   Color blue400 = Colors.blue.shade400;
+  static   Color blue500 = Colors.blue.shade500;
+  static   Color blue600 = Colors.blue.shade600;
+  static   Color blue700 = Colors.blue.shade700;
+  static   Color blue800 =Colors.blue.shade800;
+  static   Color blue900 = Colors.blue.shade900;
   static const Color blue10 = Color(0xff000000);
 
   //purple

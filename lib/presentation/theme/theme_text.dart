@@ -7,7 +7,7 @@ class ThemeText {
   static final TextStyle bodyRegular = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 14.sp,
-    color: AppColors.black,
+    color: AppColors.grey4,
   );
 
   static final TextStyle bodyMedium = bodyRegular.copyWith(
@@ -349,47 +349,35 @@ extension CommonFontColor on TextStyle {
   /// color: AppColors.blue,
   TextStyle get blue => copyWith(color: AppColors.blue);
 
-  /// color: AppColors.blue0,
-  TextStyle get blue0 => copyWith(color: AppColors.blue0);
+  /// color: AppColors.blue50,
+  TextStyle get blue50 => copyWith(color: AppColors.blue50);
 
-  /// color: AppColors.blue0.5,
-  TextStyle get blue0_5 => copyWith(color: AppColors.blue0_5);
+  /// color: AppColors.blue100,
+  TextStyle get blue100 => copyWith(color: AppColors.blue100);
 
-  /// color: AppColors.blue1,
-  TextStyle get blue1 => copyWith(color: AppColors.blue1);
+  /// color: AppColors.blue200,
+  TextStyle get blue200 => copyWith(color: AppColors.blue200);
 
-  /// color: AppColors.blue1.5,
-  TextStyle get blue1_5 => copyWith(color: AppColors.blue1_5);
+  /// color: AppColors.blue300,
+  TextStyle get blue300 => copyWith(color: AppColors.blue300);
 
-  /// color: AppColors.blue2,
-  TextStyle get blue2 => copyWith(color: AppColors.blue2);
+  /// color: AppColors.blue400,
+  TextStyle get blue400 => copyWith(color: AppColors.blue400);
 
-  /// color: AppColors.blue3,
-  TextStyle get blue3 => copyWith(color: AppColors.blue3);
+  /// color: AppColors.blue500,
+  TextStyle get blue500 => copyWith(color: AppColors.blue500);
 
-  /// color: AppColors.blue4,
-  TextStyle get blue4 => copyWith(color: AppColors.blue4);
+  /// color: AppColors.blue600,
+  TextStyle get blue600 => copyWith(color: AppColors.blue600);
 
-  /// color: AppColors.blue5,
-  TextStyle get blue5 => copyWith(color: AppColors.blue5);
+  /// color: AppColors.blue700,
+  TextStyle get blue700 => copyWith(color: AppColors.blue700);
 
-  /// color: AppColors.blue6,
-  TextStyle get blue6 => copyWith(color: AppColors.blue6);
+  /// color: AppColors.blue800,
+  TextStyle get blue800 => copyWith(color: AppColors.blue800);
 
-  /// color: AppColors.blue7,
-  TextStyle get blue7 => copyWith(color: AppColors.blue7);
-
-  /// color: AppColors.blue8,
-  TextStyle get blue8 => copyWith(color: AppColors.blue8);
-
-  /// color: AppColors.blue8.5,
-  TextStyle get blue8_5 => copyWith(color: AppColors.blue8_5);
-
-  /// color: AppColors.blue9,
-  TextStyle get blue9 => copyWith(color: AppColors.blue9);
-
-  /// color: AppColors.blue9.5,
-  TextStyle get blue9_5 => copyWith(color: AppColors.blue9_5);
+  /// color: AppColors.blue900,
+  TextStyle get blue900 => copyWith(color: AppColors.blue900);
 
   /// color: AppColors.blue10,
   TextStyle get blue10 => copyWith(color: AppColors.blue10);
@@ -447,4 +435,10 @@ extension CommonFontColor on TextStyle {
 
   /// color: AppColors.green,
   TextStyle get green => copyWith(color: AppColors.green);
+
+  ///underline
+  TextStyle get underline => copyWith(decoration: TextDecoration.underline);
+
+  //italic
+  TextStyle get italic => copyWith(fontStyle: FontStyle.italic);
 }

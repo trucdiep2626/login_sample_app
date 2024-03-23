@@ -18,6 +18,10 @@ class MainStateNotifier extends StateNotifier<MainState> {
   Ref ref;
   AccountUseCase accountUseCase;
 
+  void onChangedNav(int index) {
+    state = state.copyWith(currentIndex: index);
+  }
+
   Future<void> logout() async {
     await accountUseCase.logout();
     NavigationService.routeToAndRemoveUntil(

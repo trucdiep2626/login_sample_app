@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:login_sample_app/common/constants/app_dimens.dart';
 import 'package:login_sample_app/common/utils/app_utils.dart';
 import 'package:login_sample_app/presentation/theme/export.dart';
+import 'package:login_sample_app/presentation/widgets/app_text.dart';
 
 class AppTextField extends StatefulWidget {
   const AppTextField({
@@ -93,9 +94,12 @@ class AppTextField extends StatefulWidget {
 class AppTextFieldState extends State<AppTextField> {
   dynamic _focusNode;
   bool _obscureText = false;
+  bool isFirst = true;
+  late Color borderColor;
 
   @override
   void initState() {
+    borderColor = AppColors.stroke;
     if (widget.focusNode != null) {
       _focusNode = widget.focusNode;
     } else {
@@ -106,7 +110,13 @@ class AppTextFieldState extends State<AppTextField> {
         widget.onChangedFocus!(_focusNode.hasFocus);
       }
       if (mounted) {
-        setState(() {});
+        setState(() {
+          if (_focusNode.hasFocus) {
+            borderColor = widget.borderColor ?? AppColors.blue;
+          } else {
+            borderColor = AppColors.stroke;
+          }
+        });
       }
     });
 
@@ -137,16 +147,15 @@ class AppTextFieldState extends State<AppTextField> {
             borderRadius: widget.isUnderline
                 ? null
                 : BorderRadius.circular(
-                    widget.borderRadius ?? AppDimens.radius_8),
+                    widget.borderRadius ?? AppDimens.radius_12),
             border: widget.isUnderline
                 ? Border(
                     bottom: BorderSide(
-                      color: widget.borderColor ?? AppColors.stroke,
+                      color: borderColor,
                       width: 1.0,
                     ),
                   )
-                : Border.all(
-                    color: widget.borderColor ?? AppColors.stroke, width: 1.0),
+                : Border.all(color: borderColor, width: 1.0),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -164,7 +173,7 @@ class AppTextFieldState extends State<AppTextField> {
                 keyboardType: widget.keyboardType,
                 readOnly: widget.readOnly,
                 inputFormatters: widget.inputFormatters,
-                autofocus: widget.autoFocus,
+                autofocus: widget.autoFocus ?? true,
                 onTap: widget.onTap,
                 cursorColor: AppColors.black,
                 maxLength: widget.maxLength,
@@ -192,8 +201,8 @@ class AppTextFieldState extends State<AppTextField> {
                             right: AppDimens.space_12,
                           ),
                           child: SizedBox(
-                       //     width: AppDimens.space_20,
-                       //     height: AppDimens.space_20,
+                            //     width: AppDimens.space_20,
+                            //     height: AppDimens.space_20,
                             child: widget.prefixIcon,
                           ),
                         )
@@ -247,7 +256,7 @@ class AppTextFieldState extends State<AppTextField> {
           Padding(
             padding: EdgeInsets.only(
                 left: AppDimens.space_16, top: AppDimens.space_4),
-            child: Text(
+            child: AppText(
               widget.errorText,
               style: ThemeText.errorText,
             ),

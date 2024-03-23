@@ -12,8 +12,10 @@ class AppDimens {
   static const double radius_8 = 8;
   static const double radius_12 = 12;
   static const double radius_16 = 16;
+  static const double radius_30 = 30;
 
   /// Space
+  static double space_1 = 1.sp;
   static double space_2 = 2.sp;
   static double space_4 = 4.sp;
   static double space_6 = 6.sp;

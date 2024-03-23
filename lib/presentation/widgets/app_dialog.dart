@@ -4,6 +4,7 @@ import 'package:login_sample_app/common/constants/app_dimens.dart';
 import 'package:login_sample_app/common/utils/layout_extension.dart';
 import 'package:login_sample_app/presentation/theme/export.dart';
 import 'package:login_sample_app/presentation/widgets/app_button.dart';
+import 'package:login_sample_app/presentation/widgets/app_text.dart';
 
 Future showAppDialog(BuildContext context, String titleText, String messageText,
     {Widget? messageWidget,
@@ -139,14 +140,14 @@ class _AppDialogState extends State<AppDialog> with LayoutExtension {
                 //       ),
                 isNullEmpty(widget.title)
                     ? const SizedBox.shrink()
-                    : Text(
+                    : AppText(
                         widget.title!,
                         textAlign: TextAlign.start,
                         style: ThemeText.bodySemibold.s16
                             .copyWith(color: AppColors.white),
                       ),
                 SizedBox(height: AppDimens.space_8),
-                Text(
+                AppText(
                   widget.message,
                   textAlign: widget.messageTextAlign,
                   style: ThemeText.bodyRegular,

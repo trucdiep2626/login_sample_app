@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_sample_app/common/constants/app_dimens.dart';
 import 'package:login_sample_app/common/constants/enums.dart';
 import 'package:login_sample_app/presentation/theme/export.dart';
+import 'package:login_sample_app/presentation/widgets/app_text.dart';
 import 'package:login_sample_app/presentation/widgets/export.dart';
 
 import 'flash.dart';
@@ -111,7 +112,7 @@ class AppSnackBarWidget extends StatelessWidget {
           //   width: AppDimens.space_12,
           // ),
           Expanded(
-            child: Text(
+            child: AppText(
               message,
               style: Theme.of(context)
                   .textTheme

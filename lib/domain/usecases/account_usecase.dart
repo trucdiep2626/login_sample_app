@@ -61,6 +61,14 @@ class AccountUseCase {
     return null;
   }
 
+  Future<BaseResponse?> forgotPassword({
+    required SendSignUpCodeRequest sendSignUpCodeRequest,
+  }) async {
+    final result = await accountRepo.sendSignUpCode(
+        sendSignUpCodeRequest: sendSignUpCodeRequest);
+    return result;
+  }
+
   Future<void> logout() async {
     await localRepo.deleteAllSecureData();
   }

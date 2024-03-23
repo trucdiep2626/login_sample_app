@@ -45,4 +45,17 @@ class AccountRepository {
     print('------$baseRes');
     return baseRes;
   }
+
+  Future<BaseResponse?> forgotPassword({
+    required SendSignUpCodeRequest sendSignUpCodeRequest,
+  }) async {
+    var baseRes = await client.request(
+      method: NetworkMethod.post,
+      path: NetworkConfig.sendSignUpCode,
+      data: sendSignUpCodeRequest.toJson(),
+      getFullResponse: true,
+    );
+    print('------$baseRes');
+    return baseRes;
+  }
 }

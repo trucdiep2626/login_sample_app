@@ -1,9 +1,16 @@
 {
   "invalid_email": "Invalid email",
+
+
+  "something_went_wrong": "Something went wrong",
   "no_internet_connection": "No internet connection",
+
+
   "enter_email": "Enter email",
   "enter_password": "Enter password",
   "enter_confirm_password": "Enter confirm password",
+
+
   "sign_in": "Sign in",
   "tweet_trip": "Tweet Trip",
   "tweet_trip_message": "Your Ultimate Travel Companion!",
@@ -12,15 +19,17 @@
   "tour_guide": "Tour Guide",
   "need_help": "Need help?",
   "or": "or",
-  "sign_up": "Sign up",
+
+  "register": "Register",
   "last_name": "Last Name",
   "first_name": "First Name",
   "email": "Email",
   "password": "Password",
   "confirm_password": "Confirm Password",
+  "booking_ref": "Booking Ref",
   "aldready_have_account": "Already have an account?",
   "sign_in_here": "Sign in here",
-  "forgot_password": "Forgot password?",
+  "forgot_password": "Forgot password",
   "create_account": "Create Account",
   "dont_have_account": "Don't have an account?",
   "verify_sign_up_code": "Verify Sign Up Code",
@@ -33,5 +42,33 @@
   "dont_receive_code": "Don't receive code?",
   "confirm_password_error": "Password and password confirmation don't match",
   "password_error": "Password must be at least 6 characters",
-  "invalid_password": "Invalid password"
+  "invalid_password": "Invalid password",
+
+  "send": "Send",
+
+  "home": "Home",
+  "trips": "Trips",
+  "chat": "Chat",
+  "profile": "Profile",
+
+  "on_the_trip": "On the trip",
+  "departure": "Departure",
+  "value_days": "{value} days",
+
+  "view_travel_voucher": "View Travel Voucher",
+  "passenger_information_form": "Passenger Information Form",
+  "duration": "Duration",
+  "accomodation": "Accomodation",
+  "tour_guide_information": "Tour Guide Information",
+  "chat_with_tour_guide_now": "Chat with Tour Guide now!",
+  "information": "Information",
+  "trip_inclusions": "Trip Inclusions",
+  "tipping_guidelines": "Tipping Guidelines",
+  "local_assistance_travel_guidance": "Local Assistance & Travel Guidance",
+
+  "trip_information": "Trip Information",
+  "emergency_contact": "Emergency Contact",
+  "transfer": "Transfer",
+  "pick_up": "Pick-up",
+  "view_more_details": "View more details"
 }

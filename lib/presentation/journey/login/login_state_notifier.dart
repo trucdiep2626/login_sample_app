@@ -6,8 +6,8 @@ import 'package:login_sample_app/domain/models/requests/login_request.dart';
 import 'package:login_sample_app/domain/usecases/account_usecase.dart';
 import 'package:login_sample_app/presentation/journey/login/login_state.dart';
 
-final loginProvider = StateNotifierProvider.autoDispose<LoginStateNotifier, LoginState>(
-    (ref) =>
+final loginProvider =
+    StateNotifierProvider.autoDispose<LoginStateNotifier, LoginState>((ref) =>
         LoginStateNotifier(ref: ref, accountUseCase: getIt<AccountUseCase>()));
 
 class LoginStateNotifier extends StateNotifier<LoginState> {
@@ -17,6 +17,7 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
   }) : super(LoginState()) {
     emailController.addListener(checkButtonEnable);
     passwordController.addListener(checkButtonEnable);
+    bookingRefController.addListener(checkButtonEnable);
   }
 
   @override
@@ -25,6 +26,7 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
     super.dispose();
     emailController.dispose();
     passwordController.dispose();
+    bookingRefController.dispose();
   }
 
   void initData(UserType userType) {
@@ -39,6 +41,7 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
     );
     emailController.clear();
     passwordController.clear();
+    bookingRefController.clear();
   }
 
   // Variable for Ref
@@ -47,9 +50,16 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final bookingRefController = TextEditingController();
+  final emailFocusNode = FocusNode();
+  final passwordFocusNode = FocusNode();
+  final bookingRefFocusNode = FocusNode();
 
   void checkButtonEnable() {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+    if (emailController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty &&
+        (state.userType == UserType.passenger ||
+            bookingRefController.text.isNotEmpty)) {
       state = state.copyWith(enableButton: true);
     } else {
       state = state.copyWith(enableButton: false);

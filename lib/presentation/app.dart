@@ -48,7 +48,6 @@ class App extends ConsumerWidget {
     // // This is a flag to check if the user is using the app for the first time.
     //final theFirstTime = HiveServices.firstTimeUseApp;
 
-
     // Setup status bar color
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(

@@ -13,9 +13,7 @@ class SplashStateNotifier extends StateNotifier<SplashState> {
   SplashStateNotifier({
     required this.ref,
     required this.accountUseCase,
-  }) : super(SplashState()) {
-    initialRoute();
-  }
+  }) : super(SplashState());
 
   // Variable for Ref
   Ref ref;
@@ -30,8 +28,12 @@ class SplashStateNotifier extends StateNotifier<SplashState> {
             RouteGenerator.main, (route) => false);
       }
     } else {
-      NavigationService.routeToAndRemoveUntil(
-          RouteGenerator.introduction, (route) => false);
+      if (NavigationService.currentRouter() != RouteGenerator.introduction) {
+        NavigationService.routeToAndRemoveUntil(
+          RouteGenerator.introduction,
+          (route) => false,
+        );
+      }
     }
   }
 }

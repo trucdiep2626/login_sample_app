@@ -4,6 +4,7 @@ import 'package:login_sample_app/common/constants/enums.dart';
 import 'package:login_sample_app/common/utils/app_utils.dart';
 import 'package:login_sample_app/generated/assets.gen.dart';
 import 'package:login_sample_app/presentation/theme/export.dart';
+import 'package:login_sample_app/presentation/widgets/app_text.dart';
 import 'package:login_sample_app/presentation/widgets/export.dart';
 
 class AppButton extends StatelessWidget {
@@ -18,6 +19,7 @@ class AppButton extends StatelessWidget {
   final bool isOutlineButton;
   final SvgGenImage? icon;
   final FontWeight? fontWeight;
+  final IconData? iconData;
 
   const AppButton({
     Key? key,
@@ -25,13 +27,14 @@ class AppButton extends StatelessWidget {
     this.enable = true,
     required this.title,
     this.loaded = LoadedType.finish,
-    this.backgroundColor = AppColors.green2,
+    this.backgroundColor,
     this.titleColor = AppColors.white,
     this.titleFontSize,
     this.width,
     this.onPressed,
     this.icon,
     this.fontWeight,
+    this.iconData,
   }) : super(key: key);
 
   @override
@@ -77,9 +80,10 @@ class AppButton extends StatelessWidget {
                   } else {
                     if (isOutlineButton) return AppColors.white;
                     if (loaded == LoadedType.start) {
-                      return backgroundColor!.withOpacity(0.7);
+                      return (backgroundColor ?? AppColors.blue600)
+                          .withOpacity(0.7);
                     } else {
-                      return backgroundColor!;
+                      return backgroundColor ?? AppColors.blue600;
                     }
                   }
                 },
@@ -105,7 +109,15 @@ class AppButton extends StatelessWidget {
                               ? AppColors.blue
                               : AppColors.white,
                         ),
-                      Text(
+                      if (iconData != null)
+                        Padding(
+                          padding: EdgeInsets.only(right: AppDimens.space_8),
+                          child: Icon(
+                            iconData,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      AppText(
                         title,
                         style: ThemeText.bodyStrong.s16.copyWith(
                           color: isOutlineButton
