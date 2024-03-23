@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:login_sample_app/presentation/journey/forgot_password/forgot_password_screen.dart';
 import 'package:login_sample_app/presentation/journey/introduction/introduction_screen.dart';
 import 'package:login_sample_app/presentation/journey/login/login_screen.dart';
 import 'package:login_sample_app/presentation/journey/main/main_screen.dart';
 import 'package:login_sample_app/presentation/journey/register/register_screen.dart';
 import 'package:login_sample_app/presentation/journey/splash/splash_screen.dart';
+import 'package:login_sample_app/presentation/journey/trip_detail/trip_detail_screen.dart';
+import 'package:login_sample_app/presentation/journey/trip_information/trip_information_screen.dart';
 import 'package:login_sample_app/presentation/journey/verify_sign_up_code/verify_sign_up_code_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class RouteGenerator {
   /// All the route paths. So that we can access them easily  across the app
-  static const login = 'login_screen';
-  static const main = 'main_screen';
   static const splash = 'splash_screen';
   static const introduction = 'introduction_screen';
+
+  static const login = 'login_screen';
   static const register = 'register_screen';
   static const verifySignUpCode = 'verify_sign_up_code_screen';
+  static const forgotPassword = 'forgot_password_screen';
+
+  static const main = 'main_screen';
+
+  static const tripDetail = 'trip_detail_screen';
+  static const tripInformation = 'trip_information_screen';
 
   /// Private static methods to route to page with transition
   /// REQUIRE use function
@@ -44,7 +53,7 @@ class RouteGenerator {
       case main:
         return _pageTransition(
           settings: settings,
-          child: const MainScreen(),
+          child: MainScreen(),
         );
       case splash:
         return _pageTransition(
@@ -65,6 +74,21 @@ class RouteGenerator {
         return _pageTransition(
           settings: settings,
           child: const VerifySignUpCodeScreen(),
+        );
+      case forgotPassword:
+        return _pageTransition(
+          settings: settings,
+          child: const ForgotPasswordScreen(),
+        );
+      case tripDetail:
+        return _pageTransition(
+          settings: settings,
+          child: const TripDetailScreen(),
+        );
+        case tripInformation:
+        return _pageTransition(
+          settings: settings,
+          child: const TripInformationScreen(),
         );
       default:
         return MaterialPageRoute(
